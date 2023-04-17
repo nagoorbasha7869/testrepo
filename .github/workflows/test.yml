@@ -1,0 +1,9 @@
+name: Hello World
+on: [push]
+
+jobs:
+  print_hello_world:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print Hello World
+      run: echo "Hello, world from test repo!"
