@@ -1,0 +1,12 @@
+Docker installation and loki& promtail 
+    •   sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    •   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    •  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    •  sudo apt install docker-ce docker-ce-cli containerd.io
+    •   sudo systemctl start docker
+    •  wget https://raw.githubusercontent.com/grafana/loki/v2.8.0/cmd/loki/loki-local-config.yaml -O loki-config.yaml
+    •  wget https://raw.githubusercontent.com/grafana/loki/v2.8.0/clients/cmd/promtail/promtail-docker-config.yaml -O promtail-config.yaml
+    •  sudo docker run -d -p 3100:3100 --name loki -v $(pwd)/config.yaml:/etc/loki/config.yaml grafana/loki:2.8.0
+    •  sudo docker run -d --name promtail -v $(pwd):/mnt/config -v /var/log:/var/log --link loki grafana/promtail:2.8.0 –config.file=/mnt/config/promtail-config.yaml
+    • sudo docker ps
+ 
